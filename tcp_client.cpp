@@ -10,6 +10,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
+#include <sys/types.h>
+#include <sys/un.h>
+
 int main(int argc, char const *argv[]) 
 { 
 	// check to see if user input is valid
@@ -23,6 +26,10 @@ int main(int argc, char const *argv[])
 	int client_fd = -1;
 
 	// TODO: Create a TCP socket()
+
+int sockfd (AF_UNIX, SOCK_SEQPACKET, 0);
+
+
 
 	// Enable reusing address and port
 	if (setsockopt(client_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) { 
@@ -44,10 +51,18 @@ int main(int argc, char const *argv[])
 	getaddrinfo(server_ip.c_str(), server_port.c_str(), &hints, &server_addr);
 
 	// TODO: Connect() to the server (hint: you'll need to use server_addr)
+	
+	int connect(sockfd, server_addr, sizeof(server_addr));
+	
 	// TODO: Retreive user input
+	
+	ssize_t = read (sockfd, void *buf, size_t count);
+	
 	// TODO: Send() the user input to the server
 	// TODO: Recieve any messages from the server and print it here. Don't forget to make sure the string is null terminated!
+	
 	// TODO: Close() the socket
+	close(sockfd);
 
 	return 0; 
 } 
